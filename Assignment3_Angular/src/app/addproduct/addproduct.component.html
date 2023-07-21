@@ -1,0 +1,51 @@
+<mat-card style="text-align: center;">
+    <mat-card-title>Add new Product</mat-card-title> <br>
+<mat-card-content>
+
+<form > <!---->
+  <p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <input type="number" matInput placeholder="Price" formControlName="price">
+    </mat-form-field>
+  </p>
+
+    <mat-form-field>
+      <mat-label formControlName="brandcontrol">Brands</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let b of brands" [value]="b.name">{{b.name}}</mat-option>
+      </mat-select>
+  </mat-form-field>    
+
+  
+  <p>
+    <mat-form-field>
+      <mat-label>Product Type</mat-label>
+        <mat-select #typeselected (change)="onTypeSelected(typeselected.value)">
+          <mat-option *ngFor="let t of types" [value]="t.name">{{t.name}}</mat-option>
+      </mat-select>
+  </mat-form-field>    
+  </p>
+  
+
+  <p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Product Description" formControlName="description">
+    </mat-form-field>
+  </p>
+  
+ 
+    <input type="file" (change)="onFileSelected($event)" />
+   
+<br>
+  <div class="button">
+    <button type="submit" mat-button color="primary" (click)="submit()">Submit</button>
+  </div>
+</form>
+</mat-card-content>
+</mat-card>
+

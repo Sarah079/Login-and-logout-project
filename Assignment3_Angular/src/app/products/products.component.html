@@ -1,0 +1,87 @@
+<!--
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+<table class="table table-striped table-hover table-bordered"> 
+  <thead> 
+      <tr> 
+          <th scope="col" class="col-sm-1"></th> 
+          <th scope="col"class="col-sm-2">Name</th> 
+          <th scope="col" class="col-sm-1">Price</th>
+          <th scope="col" class="col-sm-1">Brand</th>
+          <th scope="col" class="col-sm-1">Product Type</th>
+          <th scope="col" class="col-sm-4">Description</th>
+          </tr> 
+  </thead> 
+  <tbody> 
+      <tr *ngFor="let i of products"> 
+          <td>
+            <img src="ata:image/jpg;base64, {{i.productImage}}" class="img-fluid">
+          </td> 
+          <td>{{i.productName}}</td> 
+          <td>R{{i.productPrice}}</td> 
+          <td>{{i.productBrand}}</td>
+          <td>{{i.productType}}</td> 
+          <td>{{i.productDescription}}</td>
+          
+      </tr> 
+  </tbody> 
+  -->
+
+
+  <mat-form-field >
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
+</mat-form-field>
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)"> 
+
+    <ng-container matColumnDef="productImage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> Image</th>
+        <td mat-cell *matCellDef="let product"> 
+          <img [src]="product.productImage" />
+         </td>
+      </ng-container>
+
+   
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> Name </th>
+      <td mat-cell *matCellDef="let product"> {{product.productName}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="productPrice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> Price </th>
+      <td mat-cell *matCellDef="let product"> R {{product.productPrice}} </td>
+    </ng-container>
+  
+   
+    <ng-container matColumnDef="productBrand">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> Brand </th>
+        <td mat-cell *matCellDef="let product"> {{product.productBrand}} </td>
+    </ng-container>
+
+   
+    <ng-container matColumnDef="productType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> Product Type </th>
+        <td mat-cell *matCellDef="let product"> {{product.productType}} </td>
+    </ng-container>
+
+ 
+    <ng-container matColumnDef="productDescription">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> Description </th>
+        <td mat-cell *matCellDef="let product"> {{product.productDescription}} </td>
+    </ng-container>  
+   
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  
+  </table>
+
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
